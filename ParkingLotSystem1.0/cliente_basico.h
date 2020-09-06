@@ -34,6 +34,16 @@ public:
                           QString,QString,QString,QString); // La terjeta se actualiza con un metodo propio.
     QString GetNombre();
     QString GetMatricula();
+    QString GetApellido_Materno();
+    QString GetApellido_Paterno();
+    int GetId();
+    QString GetPais();
+    QString GetEstado();
+    QString GetCiudad();
+    QString GetCalle();
+    QString GetNumero_Domicilio();
+    QString GetCorreo_Electronico();
+    Tarjeta * GetC_Tarjeta();
 
 
 

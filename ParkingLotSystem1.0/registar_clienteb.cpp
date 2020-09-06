@@ -16,6 +16,12 @@ Registar_ClienteB::~Registar_ClienteB()
 void Registar_ClienteB::on_Accion_buttonBox_accepted()
 {
 
+    QSqlQuery a;
+
+
+    nuevo = new Cliente_Basico();
+
+
 }
 
 void Registar_ClienteB::on_Accion_buttonBox_rejected()

@@ -84,13 +84,13 @@
     <string>Agregar Forma de Pago</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>70</x>
      <y>100</y>
      <width>227</width>
-     <height>80</height>
+     <height>108</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -136,13 +136,27 @@
       </item>
      </layout>
     </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_10">
+      <item>
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Teléfono Celular</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="Telefono_lineEdit"/>
+      </item>
+     </layout>
+    </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>200</y>
+     <y>270</y>
      <width>227</width>
      <height>136</height>
     </rect>
@@ -220,13 +234,13 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>420</x>
      <y>110</y>
      <width>221</width>
-     <height>52</height>
+     <height>80</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -245,22 +259,36 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_10">
+     <layout class="QHBoxLayout" name="horizontalLayout_13">
       <item>
-       <widget class="QLabel" name="label_9">
+       <widget class="QLabel" name="label_16">
         <property name="text">
-         <string>Teléfono Celular</string>
+         <string>Contraseña:</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="Telefono_lineEdit"/>
+       <widget class="QLineEdit" name="password_lineEdit"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_14">
+      <item>
+       <widget class="QLabel" name="label_17">
+        <property name="text">
+         <string>Repetir Contraseña: </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="Repeat_password_lineEdit"/>
       </item>
      </layout>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>440</x>

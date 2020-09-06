@@ -65,4 +65,62 @@ QString Cliente_Basico::GetMatricula()
     return Matricula;
 }
 
+QString Cliente_Basico::GetApellido_Materno()
+{
+    return Apellido_Materno;
+}
+
+QString Cliente_Basico::GetApellido_Paterno()
+{
+    return Apellido_Paterno;
+}
+
+int Cliente_Basico::GetId()
+{
+    return Id;
+}
+
+QString Cliente_Basico::GetPais()
+{
+    return Pais;
+}
+
+QString Cliente_Basico::GetEstado()
+{
+    return Estado;
+}
+
+QString Cliente_Basico::GetCiudad()
+{
+    return Ciudad;
+}
+
+QString Cliente_Basico::GetCalle()
+{
+    return Calle;
+}
+
+QString Cliente_Basico::GetNumero_Domicilio()
+{
+    return Numero_Domicilio;
+}
+
+QString Cliente_Basico::GetCorreo_Electronico()
+{
+    return Correo_Electronico;
+}
+
+Tarjeta *Cliente_Basico::GetC_Tarjeta()
+{
+    return C_Tarjeta;
+}
+
+
+
+
+
+
+
+
+
 
