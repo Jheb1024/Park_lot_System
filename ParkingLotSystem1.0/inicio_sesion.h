@@ -12,6 +12,7 @@
 #include "administrador.h"
 #include "cliente_basico.h"
 #include "cliente_b_principal.h"
+#include "administrador_principal.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Inicio_Sesion; }

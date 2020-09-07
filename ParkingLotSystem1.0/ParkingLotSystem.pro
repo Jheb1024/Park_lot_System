@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     administrador.cpp \
+    administrador_principal.cpp \
     cliente_b_principal.cpp \
     cliente_basico.cpp \
     eliminarclienteb.cpp \
@@ -30,6 +31,7 @@ SOURCES += \
 
 HEADERS += \
     administrador.h \
+    administrador_principal.h \
     cliente_b_principal.h \
     cliente_basico.h \
     eliminarclienteb.h \
@@ -41,6 +43,7 @@ HEADERS += \
     usuario.h
 
 FORMS += \
+    administrador_principal.ui \
     cliente_b_principal.ui \
     eliminarclienteb.ui \
     forma_pago.ui \

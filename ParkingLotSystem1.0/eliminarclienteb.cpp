@@ -6,9 +6,31 @@ EliminarClienteB::EliminarClienteB(QWidget *parent) :
     ui(new Ui::EliminarClienteB)
 {
     ui->setupUi(this);
+    nModel = new QSqlTableModel(this);
+    nModel->setTable("cliente");
+    nModel->select();
+    ui->tableView->setModel(nModel);
+
+
+
 }
 
 EliminarClienteB::~EliminarClienteB()
 {
     delete ui;
+}
+
+
+void EliminarClienteB::on_Eliminar_pushButton_clicked()
+{
+  nModel->removeRow(ui->tableView->currentIndex().row());
+  nModel->select();
+  ui->tableView->setModel(nModel);
+}
+
+
+
+void EliminarClienteB::on_Salir_pushButton_clicked()
+{
+    close();
 }

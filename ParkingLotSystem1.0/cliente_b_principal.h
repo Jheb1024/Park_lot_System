@@ -2,7 +2,7 @@
 #define CLIENTE_B_PRINCIPAL_H
 
 #include <QDialog>
-#include <QDialog>
+
 #include <QtSql/QtSql>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>

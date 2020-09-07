@@ -36,13 +36,6 @@
        </property>
       </spacer>
      </item>
-     <item>
-      <widget class="QLineEdit" name="Buscar_lineEdit">
-       <property name="text">
-        <string>Buscar</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
    <item row="2" column="0">
@@ -50,16 +43,29 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="Eliminar_pushButton">
          <property name="text">
-          <string>Mostrar Informacion</string>
+          <string>Elminiar Cliente</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="Salir_pushButton">
          <property name="text">
-          <string>Elminiar Cliente</string>
+          <string>Salir</string>
          </property>
         </widget>
        </item>
@@ -73,7 +79,7 @@
       </layout>
      </item>
      <item>
-      <widget class="QTableWidget" name="tableWidget"/>
+      <widget class="QTableView" name="tableView"/>
      </item>
     </layout>
    </item>

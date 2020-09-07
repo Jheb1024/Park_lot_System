@@ -80,18 +80,21 @@ void Inicio_Sesion::on_Entrar_pushButton_clicked()
         }else{
             if(band == 1){ // Hay que crear objeto administrador y pasarlo por parametro
             qDebug() << "El usuario administrador va a entrar su valor id es : " << Id;
-            GetAdmin.exec(QString("select  a.id_administrador, a.nombre_admin, a.a_paterno, a.a_materno from "
+
+            Administrador_Principal *aux2 = new Administrador_Principal(mDatabase,Id,this); // El parametro Id que se le pasa por parametro es id de usuario
+            aux2->show();
+
+           /* GetAdmin.exec(QString("select  a.id_administrador, a.nombre_admin, a.a_paterno, a.a_materno from "
                           "administrador as a where a.id_usuario = %1").arg(Id));
             while(GetAdmin.next()){
                 Admin = new Administrador(GetAdmin.value(0).toInt(),GetAdmin.value(1).toString(),
                                           GetAdmin.value(2).toString(),GetAdmin.value(3).toString(),Id);
 
-               /* qDebug() << GetAdmin.value(0).toInt();
-                qDebug() << GetAdmin.value(1).toString();
-                qDebug() << GetAdmin.value(2).toString();
-                qDebug() << GetAdmin.value(3).toString();*/
+
             }
-    GetAdmin.finish();
+             GetAdmin.finish();*/
+
+
             }else{
             if(band == 2){ // Hay que crear objeto administrador y pasarlo por parametro
               qDebug() << "El usuario cliente basico va a entrar su valor id es : " << Id;
