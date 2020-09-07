@@ -28,6 +28,10 @@ ModificarInfo::ModificarInfo(Cliente_Basico *a,QWidget *parent) :
     ui->Tipo_Coche_comboBox->addItem("Familiar");
     ui->Tipo_Coche_comboBox->addItem("Pick-up");
     ui->Tipo_Coche_comboBox->addItem("Auto-Compacto");
+
+
+    ui->tabWidget->setTabText(0,"Datos Personales");
+    ui->tabWidget->setTabText(1,"Datos del Automovil");
 }
 
 ModificarInfo::~ModificarInfo()
@@ -37,7 +41,12 @@ ModificarInfo::~ModificarInfo()
 
 Cliente_Basico *ModificarInfo::GetCliente()
 {
-        return Aux;
+    return Aux;
+}
+
+QList<int> ModificarInfo::GetLista()
+{
+    return actualizados;
 }
 
 
@@ -62,10 +71,65 @@ void ModificarInfo::on_Editar_buttonBox_rejected()
 void ModificarInfo::on_Editar_Personales_pushButton_clicked()
 {
     Actualizo = true;
-    Aux->SetNombre(ui->NOmbre_lineEdit->text());
+
+    if(Aux->GetNombre() != ui->NOmbre_lineEdit->text()){
+        actualizados << 1;
+        Aux->SetNombre(ui->NOmbre_lineEdit->text());
+
+    }
+    if(Aux->GetApellido_Paterno() != ui->ApellidoP_lineEdit_2->text()){
+        actualizados << 2;
+        Aux->SetApellido_P(ui->ApellidoP_lineEdit_2->text());
+
+    }
+    if(Aux->GetApellido_Materno() != ui->ApellidoM_lineEdit->text()){
+        actualizados << 3;
+        Aux->SetApellido_M(ui->ApellidoM_lineEdit->text());
+    }
+    if(Aux->GetCorreo_Electronico() != ui->mail_lineEdit->text()){
+        actualizados << 4;
+        Aux->SetCorreo(ui->mail_lineEdit->text());
+    }
+    if(Aux->GetTelefono() != ui->NumeroT_lineEdit->text()){
+        actualizados << 5;
+        Aux->SetTelefono(ui->NumeroT_lineEdit->text());
+    }
+    if(Aux->GetPais() != ui->Pais_lineEdit->text()){
+        actualizados << 6;
+        Aux->SetPais(ui->Pais_lineEdit->text());
+    }
+    if(Aux->GetCiudad() != ui->Ciudad_lineEdit->text()){
+        actualizados << 7;
+        Aux->SetCiudad(ui->Ciudad_lineEdit->text());
+    }
+    if(Aux->GetEstado() != ui->Estado_lineEdit->text()){
+        actualizados << 8;
+        Aux->SetEstado(ui->Estado_lineEdit->text());
+    }
+    if(Aux->GetCalle() != ui->Calle_lineEdit_2->text()){
+        actualizados << 9;
+        Aux->SetCalle(ui->Calle_lineEdit_2->text());
+    }
+    if(Aux->GetNumero_Domicilio() != ui->NumeroC_lineEdit->text()){
+        actualizados << 10;
+        Aux->SetNumero_Domicilio(ui->NumeroC_lineEdit->text());
+    }
+
+    QMessageBox::information(this,"Informacion","Se actualizaran sus datos personales");
+
+
 }
 
 void ModificarInfo::on_Editar_Auto_pushButton_clicked()
 {
         Actualizo = true;
+        if(Aux->GetMatricula() != ui->Matricula_lineEdit->text()){
+            actualizados << 11;
+            Aux->SetMatricula(ui->Matricula_lineEdit->text());
+        }
+        if(Aux->GetTipoCoche() != ui->Tipo_Coche_comboBox->currentText()){
+            actualizados << 12;
+            Aux->SetTipo_Coche(ui->Tipo_Coche_comboBox->currentText());
+        }
+   QMessageBox::information(this,"Informacion","Se actualizaran los datos del automovil");
 }

@@ -19,9 +19,9 @@ CREATE TABLE `usuario`(
 	CREATE TABLE `datos_bancarios` (
   `id_tarjeta` INT NOT NULL AUTO_INCREMENT,
   `nombre_propietario` varchar(40) NOT NULL,
-  `numero_tarjeta` varchar(18) NOT NULL,
+  `numero_tarjeta` varchar(30) NOT NULL,
   `cvc` int(4) NOT NULL,
-  `caducidad` int(4) NOT NULL,
+  `caducidad` int(6) NOT NULL,
   `tipo_tarjeta` varchar(20) NOT NULL,
   `nombre_banco` varchar(20) NOT NULL,
   PRIMARY KEY (`id_tarjeta`)
@@ -59,7 +59,7 @@ CREATE TABLE `cliente` (
   FOREIGN KEY (`id_usuario`) REFERENCES  `usuario`(`id_usuario`),
   FOREIGN KEY (`id_tarjeta`) REFERENCES  `datos_bancarios`(`id_tarjeta`)
 );
-
+describe cliente;
 
 -- Insercion de datos ejemplo --
 
@@ -80,16 +80,51 @@ INSERT INTO `datos_bancarios` (`nombre_propietario`, `numero_tarjeta`, `cvc`,
 
 
 
-INSERT INTO `cliente` (`id_cliente`,`nombre_cliente`,`aPaterno_cliente`,`aMaterno_cliente`,
+INSERT INTO `cliente` (`nombre_cliente`,`aPaterno_cliente`,`aMaterno_cliente`,
 `correo`,`telefono`,`pais`,`ciudad`,`estado`,`calle`,`numero_domicilio`,`matricula` ,
 `tipo_coche`,`id_usuario`,`id_tarjeta`)
  VALUES
-('1','John', 'Gomez', 'Agustion', 'john@gmail.com',1234567890,'mexico','cholula','puebla','4 oriente','207','12d05q','camioneta','2','1');
+('John', 'Gomez', 'Agustion', 'john@gmail.com',1234567890,'mexico','cholula','puebla','4 oriente','207','12d05q','camioneta','2','1');
+
+select * from cliente;
+describe usuario;
+
+select * from usuario;
+
+INSERT INTO usuario(nombre_usuario,password,tipo_usuario,estado)
+values('leidy@gmail.com','1234','clientebasico',1);
+
+SELECT id_usuario FROM usuario
+ORDER BY id_usuario DESC
+LIMIT 1;
+
+describe datos_bancarios;
+INSERT INTO datos_bancarios(nombre_propietario,numero_tarjeta,cvc,caducidad,tipo_tarjeta,nombre_banco)
+VALUES('Alexander Martinez','1234543212344321',345,1220,"Debito","Santander");
+
+SELECT id_tarjeta FROM datos_bancarios
+ORDER BY id_tarjeta DESC LIMIT 1;
+
+select * from cliente;
 
 
-  
-  select * from datos_bancarios;
+INSERT INTO `cliente` (`nombre_cliente`,`aPaterno_cliente`,`aMaterno_cliente`,
+`correo`,`telefono`,`pais`,`ciudad`,`estado`,`calle`,`numero_domicilio`,`matricula` ,
+`tipo_coche`,`id_usuario`,`id_tarjeta`)
+ VALUES
+('** ', '**', '**', '**',1234567890,'**','**','**','**','**','**','**','8','7');
 
-select C.nombre_cliente,T.numero_tarjeta,T.nombre_banco from
-cliente as C inner join datos_bancarios as T where C.id_tarjeta = T.id_tarjeta;
+select * from usuario;
+select * from cliente;
+describe cliente;
+
+select * from usuario;
+select * from datos_bancarios;
+describe cliente;
+
+
+
+
+
+
 

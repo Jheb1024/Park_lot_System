@@ -29,6 +29,8 @@ public:
     void VerificarBase();
     void ProbarBase();
 
+    bool VerificarCamposVacios();
+
 
 private slots:
 

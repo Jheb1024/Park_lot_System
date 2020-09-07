@@ -36,9 +36,6 @@ public:
                      ,QString,QString,QString,
                      QString,QString,QString,QString,QString,QString,int,int);
 
-    void Actualizar_Datos(QString,QString,QString
-                          ,QString,QString,QString,
-                          QString,QString,QString,QString,QString,QString); // La terjeta se actualiza con un metodo propio.
     void SetId(int);
     int GetId(){return Id;}
 
@@ -56,7 +53,18 @@ public:
     QString GetTipoCoche();
     QString GetTelefono();
 
-    void SetNombre(QString nom){ Nombre = nom;}
+    void SetNombre(QString a){ Nombre = a;}
+    void SetApellido_M(QString a){ Apellido_Materno = a;}
+    void SetApellido_P(QString a){ Apellido_Paterno = a;}
+    void SetCorreo(QString a){ Correo_Electronico = a;}
+    void SetTelefono(QString a){ Telefono = a;}
+    void SetPais(QString a){ Pais = a;}
+    void SetEstado(QString a){ Estado = a;}
+    void SetCiudad(QString a){ Ciudad = a;}
+    void SetCalle(QString a){ Calle = a;}
+    void SetNumero_Domicilio(QString a){ Numero_Domicilio = a;}
+    void SetMatricula(QString a){ Matricula = a;}
+    void SetTipo_Coche(QString a){ Tipo_Coche = a;}
 
 
 

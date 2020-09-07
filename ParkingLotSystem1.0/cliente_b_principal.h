@@ -7,9 +7,10 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QDebug>
+#include <QList>
 
 #include "cliente_basico.h"
-#include "actualizar_datos.h"
+
 #include "modificarinfo.h"
 namespace Ui {
 class Cliente_B_Principal;
@@ -39,6 +40,7 @@ private:
     QSqlDatabase PrincipalCliente;
     Cliente_Basico *cliente_principal;
     ModificarInfo *Principal_Actualizar;
+    QList<int> Conteo; //Cuenta Cuantos atributos se modificaron
 
 };
 

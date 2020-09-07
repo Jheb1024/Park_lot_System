@@ -99,58 +99,6 @@ void Inicio_Sesion::on_Entrar_pushButton_clicked()
               Cliente_B_Principal *aux = new Cliente_B_Principal(mDatabase,Id,this); // El parametro Id que se le pasa por parametro es id de usuario
               aux->show();
 
-
-
-             /* GetClienteB.exec("select id_cliente,nombre_cliente,aPaterno_cliente,aMaterno_cliente,correo,"
-                               "telefono,pais,ciudad,estado,calle, numero_domicilio,matricula,tipo_coche from cliente"
-                               "where id_usuario = 2;");*/
-
-              /*  GetClienteB.exec(QString("select id_cliente,nombre_cliente,aPaterno_cliente,aMaterno_cliente,correo,"
-                                         "telefono,pais,ciudad,estado,calle, numero_domicilio,matricula,tipo_coche from cliente"
-                                         "where id_usuario = %1;").arg(Id));*/
-
-
-              /*while(GetClienteB.next()){
-
-                  qDebug() << "Si entre al cicloaaa";
-                  qDebug() << GetClienteB.value(0).toInt();
-                  qDebug() << GetClienteB.value(1).toString();
-                  qDebug() << GetClienteB.value(2).toString();
-                  qDebug() << GetClienteB.value(3).toString();
-                  qDebug() << GetClienteB.value(4).toString();
-                  qDebug() << GetClienteB.value(5).toString();
-                  qDebug() << GetClienteB.value(6).toString();
-                  qDebug() << GetClienteB.value(7).toString();
-                  qDebug() << GetClienteB.value(8).toString();
-                  qDebug() << GetClienteB.value(9).toString();
-                  qDebug() << GetClienteB.value(10).toString();
-                  qDebug() << GetClienteB.value(11).toString();
-                  qDebug() << GetClienteB.value(12).toString();
-
-
-              }
-
-              GetClienteB.finish();*/
-
-             /* GetTarjeta.exec(QString("t.id_tarjeta,t.numero_tarjeta,t.nombre_banco, t.cvc, t.caducidad,"
-                                      "t.tipo_tarjeta   from cliente as c inner join datos_bancarios "
-                                      "as t on c.id_tarjeta = t.id_tarjeta where c.id_cliente = %1").arg(Id));
-              while(GetTarjeta.next()){
-
-                  qDebug() << GetTarjeta.value(0).toInt();
-                  qDebug() << GetTarjeta.value(1).toString();
-                  qDebug() << GetTarjeta.value(2).toString();
-                  qDebug() << GetTarjeta.value(3).toInt();
-                  qDebug() << GetTarjeta.value(4).toInt();
-                  qDebug() << GetTarjeta.value(5).toString();
-              }
-
-
-
-
-              GetTarjeta.finish();*/
-
-
             }
 
             }

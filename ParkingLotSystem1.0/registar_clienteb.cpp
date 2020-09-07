@@ -43,6 +43,40 @@ void Registar_ClienteB::ProbarBase()
 
 }
 
+bool Registar_ClienteB::VerificarCamposVacios()
+{
+        if(ui->Nombre_lineEdit->text() == "")
+            return false;
+        if(ui->ApellidoP_lineEdit->text() == "")
+            return false;
+        if(ui->ApellidoM_lineEdit->text() == "")
+            return false;
+        if(ui->NumeroDom_lineEdit->text() == "")
+            return false;
+        if(ui->Calle_lineEdit->text() == "")
+            return false;
+        if(ui->Ciudad_lineEdit->text() == "")
+            return false;
+        if(ui->Estado_lineEdit->text() == "")
+            return false;
+        if(ui->Pais_lineEdit->text() == "")
+            return false;
+        if(ui->mail_lineEdit->text() == "")
+            return false;
+        if(ui->Telefono_lineEdit->text() == "")
+            return false;
+        if(ui->Matricula_lineEdit->text() == "")
+            return false;
+        if(ui->Coche_comboBox->currentText() == "")
+            return false;
+        if(ui->Password_lineEdit->text() == "")
+            return false;
+        if(ui->Repeat_password_lineEdit->text() == "")
+            return false;
+
+        return true;
+}
+
 
 
 
@@ -59,6 +93,7 @@ void Registar_ClienteB::on_pushButton_clicked()
 
 void Registar_ClienteB::on_Aceptar_pushButton_clicked()
 {
+    if(VerificarCamposVacios()){
     usuario_nuevo = new Usuario();
     usuario_nuevo->AgregarDatos(ui->mail_lineEdit->text(),ui->Password_lineEdit->text(),
                                 ui->Repeat_password_lineEdit->text(),"cliente_basico");
@@ -168,6 +203,7 @@ void Registar_ClienteB::on_Aceptar_pushButton_clicked()
                                          "'"+ QString::number(id_usuario) + "','"+ QString::number(id_tarjeta) + "');")){
 
                  qDebug() << "El cliente se inserto correctamente con id usuario" << id_usuario << " y id tarjeta" << id_tarjeta;
+                 close();
              }
              else{
                  qDebug() << "Error query : " << InsTarjeta.lastError();
@@ -195,6 +231,9 @@ void Registar_ClienteB::on_Aceptar_pushButton_clicked()
        QMessageBox::critical(this,"Informacion","Las contraseñas no son iguales, vuelve a intentarlo");
 
      }
+  }else{
+        QMessageBox::information(this,"Campos Vacios","Todos los campos son obligatorios");
+    }
 
 }
 

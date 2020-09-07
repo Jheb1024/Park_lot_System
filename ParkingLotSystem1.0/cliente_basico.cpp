@@ -41,24 +41,7 @@ void Cliente_Basico::Registrarse(QString nom, QString a_m, QString a_p,QString c
     //Solo tendriamos que pasar los parametros de tarjeta
 }
 
-void Cliente_Basico::Actualizar_Datos(QString nom, QString a_m, QString a_p,
-                                       QString pais, QString est,
-                                      QString cd, QString calle, QString num_dom,
-                                      QString matricula,QString tipo_coche,QString correo,QString telefono)
-{
-    Nombre = nom;
-    Apellido_Materno = a_m;
-    Apellido_Paterno = a_p;
-    Pais = pais;
-    Estado = est;
-    Ciudad = cd;
-    Calle = calle;
-    Numero_Domicilio = num_dom;
-    Matricula = matricula;
-    Tipo_Coche = tipo_coche;
-    Correo_Electronico = correo;
-    Telefono = telefono;
-}
+
 
 void Cliente_Basico::SetId(int i)
 {

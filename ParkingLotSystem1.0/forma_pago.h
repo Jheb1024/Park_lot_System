@@ -2,6 +2,7 @@
 #define FORMA_PAGO_H
 
 #include <QDialog>
+#include <QMessageBox>
 #include "tarjeta.h"
 
 namespace Ui {
@@ -16,6 +17,7 @@ public:
     explicit Forma_Pago(QWidget *parent = nullptr);
     ~Forma_Pago();
     Tarjeta * GetTarjeta(); // Regreso Tarjeta;
+    bool VerificacionCampos();
 
 
 
