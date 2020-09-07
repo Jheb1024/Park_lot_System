@@ -15,6 +15,11 @@ public:
     Tarjeta();
     void Registrar_Datos(QString nom_p, QString num_t, QString nom_b, QString caducidad, QString cvc);
     void Actualizar_datos(QString nom_p, QString num_t, QString nom_b, QString caducidad, QString cvc);
+    QString GetNombre_Propietario(){return Nombre_Propietario;}
+    QString GetNumero_Tarjeta(){return Numero_Tarjeta;}
+    QString GetNombre_Banco(){return Nombre_Banco;}
+    QString GetCaducidad(){return Caducidad;}
+    QString GetCVC(){return CVC;}
 };
 
 #endif // TARJETA_H

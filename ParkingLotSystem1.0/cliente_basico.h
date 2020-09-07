@@ -10,40 +10,53 @@ class Cliente_Basico
 {
 protected:
 
+    int Id;
     QString Nombre;
     QString Apellido_Materno;
     QString Apellido_Paterno;
-    int Id;
+    QString Correo_Electronico;
+    QString Telefono;
     QString Pais;
     QString Estado;
     QString Ciudad;
     QString Calle;
     QString Numero_Domicilio;
     QString Matricula;
-    QString Correo_Electronico;
-    Tarjeta * C_Tarjeta;
+    QString Tipo_Coche;
+    int Id_Usuario;
+    int Id_Tarjeta;
+
+
+
+
 
 public:
     Cliente_Basico();
     void Registrarse(QString,QString,QString
-                     ,int,QString,QString,QString,
-                     QString,QString,QString,QString, Tarjeta *);
+                     ,QString,QString,QString,
+                     QString,QString,QString,QString,QString,QString,int,int);
 
     void Actualizar_Datos(QString,QString,QString
-                          ,int,QString,QString,QString,
-                          QString,QString,QString,QString); // La terjeta se actualiza con un metodo propio.
+                          ,QString,QString,QString,
+                          QString,QString,QString,QString,QString,QString); // La terjeta se actualiza con un metodo propio.
+    void SetId(int);
+    int GetId(){return Id;}
+
     QString GetNombre();
     QString GetMatricula();
     QString GetApellido_Materno();
     QString GetApellido_Paterno();
-    int GetId();
+
     QString GetPais();
     QString GetEstado();
     QString GetCiudad();
     QString GetCalle();
     QString GetNumero_Domicilio();
     QString GetCorreo_Electronico();
-    Tarjeta * GetC_Tarjeta();
+    QString GetTipoCoche();
+    QString GetTelefono();
+
+    void SetNombre(QString nom){ Nombre = nom;}
 
 
 

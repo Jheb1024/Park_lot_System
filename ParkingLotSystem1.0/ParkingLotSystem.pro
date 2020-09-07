@@ -24,8 +24,10 @@ SOURCES += \
     forma_pago.cpp \
     main.cpp \
     inicio_sesion.cpp \
+    modificarinfo.cpp \
     registar_clienteb.cpp \
-    tarjeta.cpp
+    tarjeta.cpp \
+    usuario.cpp
 
 HEADERS += \
     actualizar_datos.h \
@@ -35,8 +37,10 @@ HEADERS += \
     eliminarclienteb.h \
     forma_pago.h \
     inicio_sesion.h \
+    modificarinfo.h \
     registar_clienteb.h \
-    tarjeta.h
+    tarjeta.h \
+    usuario.h
 
 FORMS += \
     actualizar_datos.ui \
@@ -44,6 +48,7 @@ FORMS += \
     eliminarclienteb.ui \
     forma_pago.ui \
     inicio_sesion.ui \
+    modificarinfo.ui \
     registar_clienteb.ui
 
 # Default rules for deployment.

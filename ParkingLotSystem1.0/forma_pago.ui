@@ -6,12 +6,28 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>508</width>
+    <height>343</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>300</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>700</width>
+    <height>500</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>icono.png</normaloff>icono.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -61,7 +77,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QDateTimeEdit" name="Caducidad_dateTimeEdit"/>
+        <widget class="QLineEdit" name="Caducidad_lineEdit"/>
        </item>
       </layout>
      </item>
@@ -75,7 +91,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="spinBox"/>
+        <widget class="QSpinBox" name="spinBox">
+         <property name="maximum">
+          <number>1000</number>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>

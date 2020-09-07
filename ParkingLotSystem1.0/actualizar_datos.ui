@@ -30,11 +30,14 @@
    </item>
    <item row="2" column="0">
     <widget class="QTabWidget" name="tabWidget">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="tabShape">
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -243,7 +246,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="Editar_Personales_pushButton">
             <property name="text">
              <string>Guardar</string>
             </property>
@@ -263,7 +266,7 @@
         <rect>
          <x>70</x>
          <y>20</y>
-         <width>316</width>
+         <width>391</width>
          <height>104</height>
         </rect>
        </property>
@@ -303,12 +306,12 @@
                </widget>
               </item>
               <item>
-               <widget class="QFontComboBox" name="Tipo_Vehiculo_fontComboBox"/>
+               <widget class="QComboBox" name="Tipo_Coche_comboBox"/>
               </item>
              </layout>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_4">
+             <widget class="QPushButton" name="Editar_Auto_pushButton">
               <property name="text">
                <string>Guardar</string>
               </property>
@@ -328,83 +331,13 @@
        </layout>
       </widget>
      </widget>
-     <widget class="QWidget" name="tab_2">
-      <attribute name="title">
-       <string>Tab 2</string>
-      </attribute>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>100</x>
-         <y>10</y>
-         <width>251</width>
-         <height>171</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_7">
-        <item>
-         <widget class="QLabel" name="label_15">
-          <property name="text">
-           <string>Informacion:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_13">
-          <item>
-           <widget class="QLabel" name="label_13">
-            <property name="text">
-             <string>Tarjetas registradas: </string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="BancoTarjeta_label">
-            <property name="text">
-             <string>..</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_14">
-          <item>
-           <widget class="QLabel" name="label_14">
-            <property name="text">
-             <string>Numero de tarjeta:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="Numero_Tarjeta_label">
-            <property name="text">
-             <string>...</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_2">
-          <property name="text">
-           <string>Eliminar Tarjeta</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_3">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Insertar Nueva Tarjeta</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QDialogButtonBox" name="Editar_buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
     </widget>
    </item>
   </layout>

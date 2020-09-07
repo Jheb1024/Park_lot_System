@@ -25,6 +25,7 @@ public:
     Inicio_Sesion(QWidget *parent = nullptr);
     ~Inicio_Sesion();
     QSqlDatabase mDatabase;
+    void Limpiar();
 
 private slots:
     void on_Entrar_pushButton_clicked();

@@ -8,7 +8,10 @@ Inicio_Sesion::Inicio_Sesion(QWidget *parent)
     ui->setupUi(this);
 
     //Realizamos la conexión con la base de datos
+    setWindowTitle("Iniciar Sesion");
+
     mDatabase = QSqlDatabase::addDatabase("QMYSQL");
+
     mDatabase.setPort(3307);
     mDatabase.setHostName("localhost");
     mDatabase.setUserName("root");
@@ -23,9 +26,16 @@ Inicio_Sesion::~Inicio_Sesion()
     delete ui;
 }
 
+void Inicio_Sesion::Limpiar()
+{
+    ui->Usuario_lineEdit->clear();
+    ui->Contraseya_lineEdit->clear();
+}
+
 
 void Inicio_Sesion::on_Entrar_pushButton_clicked()
 {
+
     if(mDatabase.open()){
         qDebug() << "Status: Conexión Establecida";
 
@@ -34,14 +44,16 @@ void Inicio_Sesion::on_Entrar_pushButton_clicked()
         int band = 0; //0 Es no encontrado //1 Es Administrador // 2 Es cliente basico
         QSqlQuery Prueba;
         QSqlQuery GetAdmin;
-        //QSqlQuery GetClienteB;
-        //QSqlQuery GetTarjeta;
+
         Prueba.exec("Select id_usuario, nombre_usuario, password, tipo_usuario from usuario;");
+
         while(Prueba.next()){
 
             userIng = Prueba.value(1).toString();
             passIng = Prueba.value(2).toString();
             TipoUsuario = Prueba.value(3).toString();
+
+
             if(ui->Usuario_lineEdit->text() == userIng && ui->Contraseya_lineEdit->text() == passIng){
                 qDebug() << "El usuario es de tipo : " << TipoUsuario;
                 if(TipoUsuario == "administrador"){
@@ -84,20 +96,8 @@ void Inicio_Sesion::on_Entrar_pushButton_clicked()
             if(band == 2){ // Hay que crear objeto administrador y pasarlo por parametro
               qDebug() << "El usuario cliente basico va a entrar su valor id es : " << Id;
 
-              Cliente_B_Principal *aux = new Cliente_B_Principal(this,Id); // El parametro Id que se le pasa por parametro es id de usuario
+              Cliente_B_Principal *aux = new Cliente_B_Principal(mDatabase,Id,this); // El parametro Id que se le pasa por parametro es id de usuario
               aux->show();
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -162,15 +162,17 @@ void Inicio_Sesion::on_Entrar_pushButton_clicked()
     else{
         qDebug() << "Status: Conexión Fallida";
     }
+    Limpiar();
 }
 
 void Inicio_Sesion::on_Cancelar_pushButton_clicked()
 {
+
     close();
 }
 
 void Inicio_Sesion::on_Registrarse_pushButton_clicked()
 {
-    registro = new Registar_ClienteB(this); //Agregarle el padre iniciar sesion
+    registro = new Registar_ClienteB(mDatabase,this); //Agregarle el padre iniciar sesion
     registro->show();
 }
