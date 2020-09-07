@@ -16,7 +16,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    actualizar_datos.cpp \
     administrador.cpp \
     cliente_b_principal.cpp \
     cliente_basico.cpp \
@@ -30,7 +29,6 @@ SOURCES += \
     usuario.cpp
 
 HEADERS += \
-    actualizar_datos.h \
     administrador.h \
     cliente_b_principal.h \
     cliente_basico.h \
@@ -43,7 +41,6 @@ HEADERS += \
     usuario.h
 
 FORMS += \
-    actualizar_datos.ui \
     cliente_b_principal.ui \
     eliminarclienteb.ui \
     forma_pago.ui \

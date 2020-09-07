@@ -53,7 +53,7 @@ Cliente_B_Principal::Cliente_B_Principal(QSqlDatabase a, int b,QWidget *parent) 
 
     delete cliente;
     ui->Id_label->setText(cliente_principal->GetNombre() + " Matricula : "+ cliente_principal->GetMatricula());
-    Principal_Actualizar = new Actualizar_Datos(cliente_principal,this);
+    Principal_Actualizar = new ModificarInfo(cliente_principal,this);
 
     QObject::connect(Principal_Actualizar,SIGNAL(Mandar_Objeto()),this,SLOT(ObtenerObjeto()));
 

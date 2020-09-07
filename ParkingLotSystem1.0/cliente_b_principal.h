@@ -10,6 +10,7 @@
 
 #include "cliente_basico.h"
 #include "actualizar_datos.h"
+#include "modificarinfo.h"
 namespace Ui {
 class Cliente_B_Principal;
 }
@@ -37,7 +38,7 @@ private:
     int Id_Usuario;
     QSqlDatabase PrincipalCliente;
     Cliente_Basico *cliente_principal;
-    Actualizar_Datos *Principal_Actualizar;
+    ModificarInfo *Principal_Actualizar;
 
 };
 
