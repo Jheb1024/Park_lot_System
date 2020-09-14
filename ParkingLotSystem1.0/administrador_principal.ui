@@ -6,20 +6,33 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>702</width>
-    <height>456</height>
+    <width>750</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#Administrador_Principal{
+border-image: url(:/Img/FA.jfif);
+}
+
+.Nombre_Adminlabe{
+color: white;
+}
+
+QPushButton{
+	color: white;
+}</string>
   </property>
   <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>701</width>
-     <height>61</height>
+     <width>731</width>
+     <height>101</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -28,27 +41,43 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>50</x>
       <y>4</y>
-      <width>651</width>
-      <height>41</height>
+      <width>661</width>
+      <height>91</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QLabel" name="label">
+       <property name="styleSheet">
+        <string notr="true">image: url(:/Img/logo.png);</string>
+       </property>
        <property name="text">
-        <string>Logotipo</string>
+        <string/>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_2">
+       <property name="font">
+        <font>
+         <pointsize>-1</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color:white;
+
+font-size: 30px;</string>
+       </property>
        <property name="text">
-        <string>Bienvenido: </string>
+        <string>ADMINISTRADOR:</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -57,65 +86,132 @@
        <property name="text">
         <string>..</string>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Salir_pushButton">
-       <property name="text">
-        <string>Salir</string>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
     </layout>
    </widget>
-   <widget class="QFrame" name="frame_2">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>60</y>
-      <width>120</width>
-      <height>391</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-   </widget>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="menu" native="true">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>100</y>
-     <width>90</width>
-     <height>71</height>
+     <x>30</x>
+     <y>160</y>
+     <width>171</width>
+     <height>301</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QPushButton" name="Eliminar_pushButton">
-      <property name="text">
-       <string>Eliminar Usuarios</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-   </layout>
+   <property name="styleSheet">
+    <string notr="true">#menu{ 
+background: rgba(0, 0, 0, 80);
+ border-radius: 8px;
+}
+
+QPushButton{
+color: #fff;
+}</string>
+   </property>
+   <widget class="QPushButton" name="Eliminar_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>155</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>155</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+border-width: 0px;
+border-radius: 9px;
+background-color: rgb(66,168,198)
+}
+
+QPushButton:hover{
+	background-color: rgb(80,189,240);
+    border-radius: 9px;
+	color: black;
+    selection-color: white;  
+    padding: 2px 4px;}</string>
+    </property>
+    <property name="text">
+     <string>Eliminar Usuarios</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>130</y>
+      <width>155</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>155</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+border-width: 0px;
+border-radius: 9px;
+background-color: rgb(66,168,198)
+}
+
+QPushButton:hover{
+	background-color: rgb(80,189,240);
+    border-radius: 9px;
+	color: black;
+    selection-color: white;  
+    padding: 2px 4px;}</string>
+    </property>
+    <property name="text">
+     <string>Visualizar Reservaciones</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Salir_pushButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>230</y>
+      <width>155</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>155</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+border-width: 0px;
+border-radius: 9px;
+background-color: rgb(66,168,198)
+}
+
+QPushButton:hover{
+	background-color: rgb(80,189,240);
+    border-radius: 9px;
+	color: black;
+    selection-color: white;  
+    padding: 2px 4px;}</string>
+    </property>
+    <property name="text">
+     <string>Salir</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

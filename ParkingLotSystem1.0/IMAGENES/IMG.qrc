@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/Img">
+        <file>F1.jfif</file>
+        <file>F2.jfif</file>
+        <file>FONDO.jfif</file>
+        <file>F4.png</file>
+        <file>logo.png</file>
+        <file>FA.jfif</file>
+        <file>FAdm.jfif</file>
+    </qresource>
+</RCC>

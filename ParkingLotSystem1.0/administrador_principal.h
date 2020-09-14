@@ -7,7 +7,7 @@
 #include <QtSql/QSqlQuery>
 #include <QDebug>
 
-#include "administrador.h"
+
 #include "eliminarclienteb.h"
 
 namespace Ui {
@@ -31,7 +31,6 @@ private:
     Ui::Administrador_Principal *ui;
     int Id_Usuario;
     QSqlDatabase PrincipalAdministrador;
-    Administrador administrador;
     EliminarClienteB *principal_eliminar;
 };
 

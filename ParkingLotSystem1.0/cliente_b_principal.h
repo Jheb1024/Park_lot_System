@@ -10,7 +10,7 @@
 #include <QList>
 
 #include "cliente_basico.h"
-
+#include "auto.h"
 #include "modificarinfo.h"
 namespace Ui {
 class Cliente_B_Principal;
@@ -39,6 +39,7 @@ private:
     int Id_Usuario;
     QSqlDatabase PrincipalCliente;
     Cliente_Basico *cliente_principal;
+    Auto * auto_principal;
     ModificarInfo *Principal_Actualizar;
     QList<int> Conteo; //Cuenta Cuantos atributos se modificaron
 

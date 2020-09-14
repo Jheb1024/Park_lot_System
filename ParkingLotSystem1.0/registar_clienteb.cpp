@@ -14,11 +14,13 @@ Registar_ClienteB::Registar_ClienteB(QSqlDatabase a, QWidget *parent) :
     ui->Coche_comboBox->addItem("Familiar");
     ui->Coche_comboBox->addItem("Pick-up");
     ui->Coche_comboBox->addItem("Auto-Compacto");
+    ui->Coche_comboBox->addItem("Motocicleta");
     ui->Aceptar_pushButton->setDisabled(true);
     VerificarBase();
     ProbarBase();
     id_usuario = 0;
     id_tarjeta = 0;
+    id_cliente = 0;
 
 }
 
@@ -55,12 +57,6 @@ bool Registar_ClienteB::VerificarCamposVacios()
             return false;
         if(ui->Calle_lineEdit->text() == "")
             return false;
-        if(ui->Ciudad_lineEdit->text() == "")
-            return false;
-        if(ui->Estado_lineEdit->text() == "")
-            return false;
-        if(ui->Pais_lineEdit->text() == "")
-            return false;
         if(ui->mail_lineEdit->text() == "")
             return false;
         if(ui->Telefono_lineEdit->text() == "")
@@ -94,6 +90,11 @@ void Registar_ClienteB::on_pushButton_clicked()
 void Registar_ClienteB::on_Aceptar_pushButton_clicked()
 {
     if(VerificarCamposVacios()){
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Confirmacion de cambios", "Deseas guardar los cambios establecidos",
+                                  QMessageBox::Yes|QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) {
     usuario_nuevo = new Usuario();
     usuario_nuevo->AgregarDatos(ui->mail_lineEdit->text(),ui->Password_lineEdit->text(),
                                 ui->Repeat_password_lineEdit->text(),"cliente_basico");
@@ -104,14 +105,6 @@ void Registar_ClienteB::on_Aceptar_pushButton_clicked()
          qDebug() << "Contraseña : " << usuario_nuevo->GetPassword();
          qDebug() << "Tipo: " << usuario_nuevo->GetTipo_Usuario();
 
-         /*---------Agregar a base de datos ------------*/
-
-
-
-
-         /*--------- Recuperar Id Cliente ------------*/
-
-
 
 
          /*---------------Ya esta registrada la terjeta  necesito el id de tarjeta  --------------------------*/
@@ -119,8 +112,7 @@ void Registar_ClienteB::on_Aceptar_pushButton_clicked()
 
 
          qDebug() << "Se registraran los siguientes datos de tarjeta ";
-         qDebug() << tarjeta->GetNombre_Banco();
-         qDebug() << tarjeta->GetNombre_Propietario();
+
          qDebug() << tarjeta->GetNumero_Tarjeta();
 
          //Puedo agregar un boleano para saber si ya registro tarjeta
@@ -128,10 +120,7 @@ void Registar_ClienteB::on_Aceptar_pushButton_clicked()
        nuevo->Registrarse(ui->Nombre_lineEdit->text(),ui->ApellidoM_lineEdit->text(),
                           ui->ApellidoP_lineEdit->text(),ui->mail_lineEdit->text(),
                           ui->Telefono_lineEdit->text(),
-                          ui->Pais_lineEdit->text(),
-                          ui->Ciudad_lineEdit->text(),ui->Estado_lineEdit->text(),
                           ui->Calle_lineEdit->text(),ui->NumeroDom_lineEdit->text(),
-                          ui->Matricula_lineEdit->text(),ui->Coche_comboBox->currentText(),
                           0,0);//Le paso los cero `porque me estorban
 
 
@@ -163,13 +152,12 @@ void Registar_ClienteB::on_Aceptar_pushButton_clicked()
             /*------------Insercion de datos bancarios ------------*/
 
             QSqlQuery InsTarjeta;
-             if(InsTarjeta.exec(QString("INSERT INTO datos_bancarios(nombre_propietario,numero_tarjeta,cvc,"
-                                        "caducidad,tipo_tarjeta,nombre_banco)"
-                                         "values('%1','%2',%3,%4,'Debito','%5');").arg(tarjeta->GetNombre_Propietario(),
-                                                                                   tarjeta->GetNumero_Tarjeta(),
-                                                                                   tarjeta->GetCVC(),
-                                                                                   tarjeta->GetCaducidad(),
-                                                                                   tarjeta->GetNombre_Banco()))){
+             if(InsTarjeta.exec(QString("INSERT INTO datos_bancarios(numero_tarjeta,cvc,"
+                                        "caducidad,tipo_tarjeta)"
+                                         "values('%1','%2',%3,'%4');").arg(tarjeta->GetNumero_Tarjeta(),
+                                                                         tarjeta->GetCVC(),
+                                                                         tarjeta->GetCaducidad(),
+                                                                         tarjeta->GetTipo()))){
                  qDebug() << "La tarjeta se inserto correctamente";
              }
              else{
@@ -191,23 +179,52 @@ void Registar_ClienteB::on_Aceptar_pushButton_clicked()
 
             QSqlQuery InsCliente;
              if(InsCliente.exec("INSERT INTO `cliente` (`nombre_cliente`,`aPaterno_cliente`,`aMaterno_cliente`,"
-                                        "`correo`,`telefono`,`pais`,`ciudad`,`estado`,`calle`,`numero_domicilio`,`matricula` ,"
-                                        "`tipo_coche`,`id_usuario`,`id_tarjeta`)"
+                                        "`correo`,`telefono`,`calle`,`numero_domicilio`,"
+                                        "`id_usuario`,`id_tarjeta`)"
                                         " VALUES "
                                         "('" + nuevo->GetNombre() + "', '" + nuevo->GetApellido_Paterno() + "',"
                                         " '" + nuevo->GetApellido_Materno()+ "', '" + nuevo->GetCorreo_Electronico()+ "',"
-                                        "'" +nuevo->GetTelefono() + "','" + nuevo->GetPais()+ "',"
-                                        "'"+nuevo->GetCiudad() +"','"+  nuevo->GetEstado() +"','"+  nuevo->GetCalle() + "',"
+                                        "'" +nuevo->GetTelefono() + "',"
+                                        "'"+  nuevo->GetCalle() + "',"
                                         "'" +  nuevo->GetNumero_Domicilio() + "',"
-                                        "'"+nuevo->GetMatricula() + "','"+nuevo->GetTipoCoche() + "',"
                                          "'"+ QString::number(id_usuario) + "','"+ QString::number(id_tarjeta) + "');")){
 
                  qDebug() << "El cliente se inserto correctamente con id usuario" << id_usuario << " y id tarjeta" << id_tarjeta;
-                 close();
+
              }
              else{
                  qDebug() << "Error query : " << InsTarjeta.lastError();
              }
+
+
+             /*Necesito encontrar el id del cliente para poder registrar el auto a su nombre*/
+             QSqlQuery VerCliente;
+             if(VerCliente.exec("SELECT id_cliente FROM cliente where id_usuario = "+ QString::number(id_usuario) + ";")){
+              while(VerCliente.next()){
+                  id_cliente = VerCliente.value(0).toInt();
+                  qDebug() << " Recopilo id de la tarjeta :)" << id_cliente;
+              }
+              VerCliente.finish();
+
+             }else{
+                 qDebug() << " Error : " << VerCliente.lastError();
+             }
+
+
+             QSqlQuery InsAuto;
+              if(InsAuto.exec("INSERT INTO auto (`matricula`,`tipo_de_coche`,`id_cliente`)"
+                                         " VALUES "
+                                         "('" + ui->Matricula_lineEdit->text() + "', '" + ui->Coche_comboBox->currentText() + "',"
+                                         + QString::number(id_cliente) + ");")){
+
+                  qDebug() << "El cliente auto se inserto correctamente";
+              }
+              else{
+                  qDebug() << "Error query : " << InsAuto.lastError();
+              }
+
+
+
 
 
 
@@ -231,6 +248,11 @@ void Registar_ClienteB::on_Aceptar_pushButton_clicked()
        QMessageBox::critical(this,"Informacion","Las contraseñas no son iguales, vuelve a intentarlo");
 
      }
+    close();
+    }
+    else{
+        qDebug() << " Cancelaron el registro ";
+    }//Aqui va la ventana emergente !!!
   }else{
         QMessageBox::information(this,"Campos Vacios","Todos los campos son obligatorios");
     }

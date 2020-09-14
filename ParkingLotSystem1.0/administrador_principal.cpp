@@ -17,24 +17,7 @@ Administrador_Principal::Administrador_Principal(QSqlDatabase a, int b,QWidget *
     }else{
         qDebug() << "Base de datos abierta";
     }
-    QSqlQuery *admin = new QSqlQuery();
-    if(admin->exec("select * from administrador where id_usuario = " + QString::number(Id_Usuario)+ ";")){
-        while(admin->next()){
-                qDebug() << "Cuantas veces ";
-            administrador.SetIdAdministrador(admin->value(0).toInt());
-            administrador.SetNombre_Admin(admin->value(1).toString());
-            administrador.SetApellido_Paterno(admin->value(2).toString());
-            administrador.SetApellido_Materno(admin->value(3).toString());
-        }
-    }
-    else{
-            qDebug() << admin->lastError();
-    }
 
-    delete admin;
-    ui->Nombre_Adminlabel->setText(administrador.GetNombre() + " " +
-                                   administrador.GetApellido_Paterno() + " "+
-                                   administrador.GetApellido_Materno());
 
 }
 

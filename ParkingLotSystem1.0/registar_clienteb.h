@@ -50,6 +50,7 @@ private:
     QSqlDatabase PrincipalRegistro;
     int id_usuario;
     int id_tarjeta;
+    int id_cliente;
 
 };
 

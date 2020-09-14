@@ -33,8 +33,7 @@ protected:
 public:
     Cliente_Basico();
     void Registrarse(QString,QString,QString
-                     ,QString,QString,QString,
-                     QString,QString,QString,QString,QString,QString,int,int);
+                     ,QString,QString,QString,QString,int,int);
 
     void SetId(int);
     int GetId(){return Id;}

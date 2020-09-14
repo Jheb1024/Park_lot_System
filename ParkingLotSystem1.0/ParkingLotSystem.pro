@@ -16,8 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    administrador.cpp \
     administrador_principal.cpp \
+    auto.cpp \
     cliente_b_principal.cpp \
     cliente_basico.cpp \
     eliminarclienteb.cpp \
@@ -30,8 +30,8 @@ SOURCES += \
     usuario.cpp
 
 HEADERS += \
-    administrador.h \
     administrador_principal.h \
+    auto.h \
     cliente_b_principal.h \
     cliente_basico.h \
     eliminarclienteb.h \
@@ -55,3 +55,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    IMAGENES/IMG.qrc

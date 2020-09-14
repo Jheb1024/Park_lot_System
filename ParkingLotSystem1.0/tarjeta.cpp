@@ -2,18 +2,18 @@
 
 Tarjeta::Tarjeta()
 {
-    Nombre_Propietario = "";
+
     Numero_Tarjeta = "";
-    Nombre_Banco = "";
+    Tipo = "";
     Caducidad = "";
     CVC = "";
 }
 
-void Tarjeta::Registrar_Datos(QString nom_p, QString num_t, QString nom_b, QString caducidad, QString cvc)
+void Tarjeta::Registrar_Datos(QString num_t, QString tipo, QString caducidad, QString cvc)
 {
-    Nombre_Propietario = nom_p;
+
     Numero_Tarjeta = num_t;
-    Nombre_Banco = nom_b;
+    Tipo = tipo;
     Caducidad = caducidad;
     CVC = cvc;
 }

@@ -23,6 +23,7 @@ EliminarClienteB::~EliminarClienteB()
 
 void EliminarClienteB::on_Eliminar_pushButton_clicked()
 {
+  qDebug() << "Linea en teoria a eliminar : " << ui->tableView->currentIndex().row();
   nModel->removeRow(ui->tableView->currentIndex().row());
   nModel->select();
   ui->tableView->setModel(nModel);

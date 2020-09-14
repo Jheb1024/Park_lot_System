@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QMessageBox>
 #include "cliente_basico.h"
+#include "auto.h"
 #include <QDebug>
 #include <QList>
 namespace Ui {
@@ -15,9 +16,10 @@ class ModificarInfo : public QDialog
     Q_OBJECT
 
 public:
-    explicit ModificarInfo(Cliente_Basico *,QWidget *parent = nullptr);
+    explicit ModificarInfo(Cliente_Basico *,Auto *,QWidget *parent = nullptr);
     ~ModificarInfo();
     Cliente_Basico * GetCliente();
+    Auto * GetAuto();
     bool GetEstado();
     QList<int> GetLista();
 
@@ -30,13 +32,10 @@ private slots:
 
     void on_Editar_buttonBox_rejected();
 
-    void on_Editar_Personales_pushButton_clicked();
-
-    void on_Editar_Auto_pushButton_clicked();
-
 private:
     Ui::ModificarInfo *ui;
     Cliente_Basico *Aux;
+    Auto *Aux2;
     bool Actualizo;
     QList<int> actualizados;
 };

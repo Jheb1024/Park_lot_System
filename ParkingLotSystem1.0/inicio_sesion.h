@@ -9,7 +9,6 @@
 #include "registar_clienteb.h"
 #include "cliente_basico.h"
 #include <QMessageBox>
-#include "administrador.h"
 #include "cliente_basico.h"
 #include "cliente_b_principal.h"
 #include "administrador_principal.h"
@@ -39,7 +38,6 @@ private:
     Ui::Inicio_Sesion *ui;
 
     Registar_ClienteB *registro;
-    Administrador *Admin;
     Cliente_Basico *Cliente_B;
     int Id;
 };

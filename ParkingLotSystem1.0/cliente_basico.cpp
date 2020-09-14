@@ -17,22 +17,15 @@ Cliente_Basico::Cliente_Basico()
 }
 
 void Cliente_Basico::Registrarse(QString nom, QString a_m, QString a_p,QString correo,QString telefono,
-                                 QString pais,QString cd, QString est,
-                                  QString calle, QString num_dom,
-                                 QString matricula,QString tipo_coche,int id_usuario,int id_tarjeta)
+                                 QString calle, QString num_dom,
+                                int id_usuario,int id_tarjeta)
 {
     //Esto es parecido a un constructor con parámetros (se inicializa el cliente).
     Nombre = nom;
     Apellido_Materno = a_m;
     Apellido_Paterno = a_p;
-
-    Pais = pais;
-    Estado = est;
-    Ciudad = cd;
     Calle = calle;
     Numero_Domicilio = num_dom;
-    Matricula = matricula;
-    Tipo_Coche = tipo_coche;
     Correo_Electronico = correo;
     Telefono = telefono;
     Id_Usuario = id_usuario;

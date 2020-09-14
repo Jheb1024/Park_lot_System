@@ -5,19 +5,17 @@
 class Tarjeta
 {
 protected:
-    QString  Nombre_Propietario;
     QString Numero_Tarjeta;
-    QString Nombre_Banco;
+    QString Tipo;
     QString Caducidad;
     QString CVC;
 
 public:
     Tarjeta();
-    void Registrar_Datos(QString nom_p, QString num_t, QString nom_b, QString caducidad, QString cvc);
-    void Actualizar_datos(QString nom_p, QString num_t, QString nom_b, QString caducidad, QString cvc);
-    QString GetNombre_Propietario(){return Nombre_Propietario;}
+    void Registrar_Datos(QString num_t, QString tipo, QString caducidad, QString cvc);
+    void Actualizar_datos(QString nom_t, QString tipo, QString caducidad, QString cvc);
     QString GetNumero_Tarjeta(){return Numero_Tarjeta;}
-    QString GetNombre_Banco(){return Nombre_Banco;}
+    QString GetTipo(){return Tipo;}
     QString GetCaducidad(){return Caducidad;}
     QString GetCVC(){return CVC;}
 };
