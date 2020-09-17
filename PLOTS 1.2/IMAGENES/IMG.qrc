@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/Img">
+        <file>F1.jfif</file>
+        <file>F2.jfif</file>
+        <file>FONDO.jfif</file>
+        <file>F4.png</file>
+        <file>logo.png</file>
+        <file>FA.jfif</file>
+        <file>FAdm.jfif</file>
+        <file>acceder.png</file>
+        <file>contrato.png</file>
+        <file>estacionamiento.png</file>
+        <file>mas (1).png</file>
+        <file>pagar.png</file>
+        <file>perfil.png</file>
+        <file>reservaciones.png</file>
+        <file>reservar.png</file>
+        <file>salir.png</file>
+        <file>adelante.png</file>
+        <file>atras.png</file>
+        <file>minus.png</file>
+        <file>icono.png</file>
+    </qresource>
+</RCC>
