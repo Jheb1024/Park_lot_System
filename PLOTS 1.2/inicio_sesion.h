@@ -11,6 +11,7 @@
 #include <QMessageBox>
 #include "cliente_basico.h"
 #include "cliente_b_principal.h"
+#include "cliente_p_principal.h"
 #include "administrador_principal.h"
 #include "ingresaconreserva.h"
 

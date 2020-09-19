@@ -123,6 +123,8 @@ void Inicio_Sesion::on_Entrar_pushButton_2_clicked()
             }else{
             if(band == 3){
               qDebug() << "El usuario cliente premium va a entrar su valor id es : " << Id;
+              Cliente_P_Principal *aux2 = new Cliente_P_Principal(mDatabase,Id,nullptr);
+              aux2->show();
             }
             }
 
