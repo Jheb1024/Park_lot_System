@@ -20,6 +20,7 @@ SOURCES += \
     auto.cpp \
     cliente_b_principal.cpp \
     cliente_basico.cpp \
+    cliente_p_principal.cpp \
     eliminarclienteb.cpp \
     forma_pago.cpp \
     main.cpp \
@@ -36,6 +37,7 @@ HEADERS += \
     auto.h \
     cliente_b_principal.h \
     cliente_basico.h \
+    cliente_p_principal.h \
     eliminarclienteb.h \
     forma_pago.h \
     inicio_sesion.h \
@@ -49,6 +51,7 @@ HEADERS += \
 FORMS += \
     administrador_principal.ui \
     cliente_b_principal.ui \
+    cliente_p_principal.ui \
     eliminarclienteb.ui \
     forma_pago.ui \
     inicio_sesion.ui \

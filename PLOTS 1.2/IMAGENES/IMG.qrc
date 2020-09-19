@@ -21,4 +21,7 @@
         <file>minus.png</file>
         <file>icono.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>Terminos.txt</file>
+    </qresource>
 </RCC>

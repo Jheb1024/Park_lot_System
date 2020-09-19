@@ -37,6 +37,7 @@ public:
 
     void SetId(int);
     int GetId(){return Id;}
+    int GetIdUsuario(){return Id_Usuario;}
 
     QString GetNombre();
     QString GetMatricula();

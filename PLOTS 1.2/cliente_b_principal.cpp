@@ -104,6 +104,11 @@ void Cliente_B_Principal::VerReservaciones(int id){
         }
     }
     delete reservaciones;
+
+
+
+    /*Relleno de terminos y condiciones */
+
 }
 
 Cliente_B_Principal::Cliente_B_Principal(int a)
@@ -174,18 +179,19 @@ Cliente_B_Principal::Cliente_B_Principal(QSqlDatabase a, int b,QWidget *parent) 
     delete recuperar_auto;
     /*---------------------------------------------------------------------------------------------------------------------------*/
 
-    qDebug() << "El error esta en eliminar el apuntador creo jajaj";
+
     ui->Id_label->setText( ""+ cliente_principal->GetNombre() +
                            " " + cliente_principal->GetApellido_Paterno() +
                            " " + cliente_principal->GetApellido_Materno() +
                            " Id Cliente : " + QString::number(cliente_principal->GetId()));
 
-    qDebug() << " El error esta en el label de bienvenida";
+
 
     Principal_Actualizar = new ModificarInfo(cliente_principal,auto_principal,this);
     QObject::connect(Principal_Actualizar,SIGNAL(Mandar_Objeto()),this,SLOT(ObtenerObjeto()));
 
-    qDebug() << " El error esta en la conexico de la señal";
+
+
 }
 
 Cliente_B_Principal::~Cliente_B_Principal()
@@ -380,7 +386,7 @@ void Cliente_B_Principal::on_Contrato_pushButton_clicked()
 
 void Cliente_B_Principal::on_Salir_pushButton_clicked()
 {
-    close();
+   close();
 }
 
 void Cliente_B_Principal::on_L_1pushButton_clicked()
@@ -626,4 +632,111 @@ void Cliente_B_Principal::on_Confirma_Reserva_pushButton_clicked()
         qDebug()<<insertar->lastError();
     }
     delete insertar;
+}
+
+/* Iniciar Contrato Premium*/
+void Cliente_B_Principal::on_Automatica_radioButton_clicked()
+{
+    ui->FechacalendarWidget->setEnabled(false);
+}
+
+void Cliente_B_Principal::on_AgregarFecha_radioButton_clicked()
+{
+    ui->FechacalendarWidget->setEnabled(true);
+
+}
+
+void Cliente_B_Principal::on_Terminos_pushButton_clicked()
+{
+    QFile file;
+    file.setFileName(":/Terminos.txt");
+    if(file.open(QIODevice::ReadOnly)){
+        QTextStream in(&file);
+        ui->Terminos_textBrowser->setText(in.readAll());
+        file.close();
+
+
+    }else{
+        ui->Terminos_textBrowser->setText("No se pueden mostrar los terminos y condiciones");
+    }
+
+    ui->Ventanas->setCurrentIndex(6);
+
+}
+
+void Cliente_B_Principal::on_Cancelar_pushButton_clicked()
+{
+    ui->FechacalendarWidget->setEnabled(false);
+    ui->Terminos_checkBox->setChecked(false);
+    ui->Ventanas->setCurrentIndex(0);
+
+}
+
+void Cliente_B_Principal::on_Aceptar_pushButton_clicked()
+{
+    QDate FechaInicioContrato = QDate::currentDate();
+    QString f_inicio = FechaInicioContrato.toString("yyyyMMdd");
+    QDate FechaFinContrato = QDate::currentDate();
+    QString f_fin = FechaFinContrato.toString("yyyyMMdd");
+    QSqlQuery *a = new QSqlQuery();
+    QSqlQuery *b = new QSqlQuery();
+    if(ui->Terminos_checkBox->isChecked()){
+        if(ui->Automatica_radioButton->isChecked()){
+            /*Aqui van los QUERYS para insertar la suscripcion y actualizar el usuario*/
+            QMessageBox ask;
+            ask.setWindowTitle("\t\tAviso Importante");
+            ask.setText("¿Esta seguro de cambiar el modo de perfil?.\n"
+                        "Se le aplicaran gastos adicionales a su tarjeta.");
+            ask.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+            ask.setDefaultButton(QMessageBox::Yes);
+            ask.setButtonText(QMessageBox::Yes,"Aceptar");
+            ask.setButtonText(QMessageBox::No,"Cancelar");
+
+            if(ask.exec()==QMessageBox::Yes){
+
+
+                if(a->exec("INSERT INTO suscripción(fecha_inicio,fecha_fin,renovacio_auto,id_cliente)"
+                           "VALUES('"+ f_inicio + "'"
+                                   ",'" + f_fin +"'"
+                                   ",1,"+ QString::number(cliente_principal->GetId()) + ");")){
+
+                        if(b->exec("UPDATE usuario SET tipo_usuario='clientepremium' where id_usuario="+QString::number(cliente_principal->GetIdUsuario()) +";")){
+                            QMessageBox info;
+                            info.setWindowTitle("Suscripcion Premium");
+                            info.setText("Su SUSCRIPCION PREMIUM a sido exitosa, vuelva a INICIAR SESION");
+                            info.setStandardButtons(QMessageBox::Ok);
+                            info.setButtonText(QMessageBox::Ok,"Aceptar");
+                            info.exec();
+                            close();
+
+
+                        }
+                        else{
+                            qDebug()<<"Fallo Actualizacion de usuario " << b->lastError();
+                        }
+
+                }
+                else{
+                    qDebug()<<"Fallo inssercion de suscripcion " << a->lastError();
+                }
+            }
+
+
+        }else{
+         if(ui->AgregarFecha_radioButton->isChecked()){
+             /*Agregar suscripcion con fecha y agregar suscripcion y actualizar usuario*/
+             /*qDebug()<<"evento calendario";
+             QDate fecha = ui->calendarWidget_2->selectedDate();
+             QString f_entrada = fecha.toString("yyyyMMdd");*/
+
+         }
+        }
+    }else{
+        QMessageBox::information(this,"Terminos y Condiciones","Aun no a aceptado los terminos y condiciones para poder continuar");
+    }
+}
+
+void Cliente_B_Principal::on_Regresar_pushButton_clicked()
+{
+    ui->Ventanas->setCurrentIndex(5);
 }

@@ -10,7 +10,9 @@
 #include <QList>
 #include <QCalendarWidget>
 #include <QTimeEdit>
-
+#include <QFile>
+#include <QTextStream>
+#include <QMessageBox>
 #include "cliente_basico.h"
 #include "auto.h"
 #include "modificarinfo.h"
@@ -101,6 +103,18 @@ private slots:
 
     void on_Confirma_Reserva_pushButton_clicked();
     
+    void on_Automatica_radioButton_clicked();
+
+    void on_AgregarFecha_radioButton_clicked();
+
+    void on_Terminos_pushButton_clicked();
+
+    void on_Cancelar_pushButton_clicked();
+
+    void on_Aceptar_pushButton_clicked();
+
+    void on_Regresar_pushButton_clicked();
+
 private:
 
     QList<int> reservaciones;
@@ -115,6 +129,7 @@ private:
     QList<int> Conteo; //Cuenta Cuantos atributos se modificaron
     int idPiso;
     int idCajon;
+
 };
 
 #endif // CLIENTE_B_PRINCIPAL_H
