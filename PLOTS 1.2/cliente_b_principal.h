@@ -115,6 +115,8 @@ private slots:
 
     void on_Regresar_pushButton_clicked();
 
+    void on_FechacalendarWidget_selectionChanged();
+
 private:
 
     QList<int> reservaciones;
@@ -129,6 +131,7 @@ private:
     QList<int> Conteo; //Cuenta Cuantos atributos se modificaron
     int idPiso;
     int idCajon;
+    QString aux_final;
 
 };
 

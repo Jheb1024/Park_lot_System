@@ -16,6 +16,7 @@
 #include "cliente_basico.h"
 #include "auto.h"
 #include "modificarinfo.h"
+#include "reser.h"
 namespace Ui {
 class Cliente_P_Principal;
 }
@@ -27,6 +28,8 @@ class Cliente_P_Principal : public QDialog
 public:
     void CargarLugares(int, QString, QString);
     void VerReservaciones(int);
+    //Declaro función para ver el historial de reservaciones con ID de cliente como parámetro (int).
+    void Ver_HistorialReservaciones(int);
     void vaciar();
     explicit Cliente_P_Principal(int);
     explicit Cliente_P_Principal(QSqlDatabase ,int b =0 ,QWidget *parent = nullptr);
@@ -99,6 +102,16 @@ private slots:
 
     void on_Confirma_Reserva_pushButton_clicked();
 
+
+
+    void on_Aceptar_pushButton_clicked();
+
+    void on_Historial_reserv_pushButton_clicked();
+
+    void on_agregar_pushButton_clicked();
+
+    void on_cancelar_reser_pushButton_clicked();
+
 private:
 
     QList<int> reservaciones;
@@ -113,6 +126,8 @@ private:
     QList<int> Conteo; //Cuenta Cuantos atributos se modificaron
     int idPiso;
     int idCajon;
+    QList<Reser> *ListaIntervalos;
+
 };
 
 #endif // CLIENTE_P_PRINCIPAL_H

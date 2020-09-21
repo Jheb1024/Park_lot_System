@@ -27,11 +27,19 @@ private slots:
 
     void on_Eliminar_pushButton_clicked();
 
+    void on_VerClientes_pushButton_2_clicked();
+
+    void on_VerReservas_pushButton_2_clicked();
+
+    void on_Entradas_Salidas_pushButton_2_clicked();
+
 private:
     Ui::Administrador_Principal *ui;
     int Id_Usuario;
     QSqlDatabase PrincipalAdministrador;
     EliminarClienteB *principal_eliminar;
+    QSqlTableModel *clientemodel;
+    QSqlTableModel *reservasmodel;
 };
 
 #endif // ADMINISTRADOR_PRINCIPAL_H

@@ -20,6 +20,9 @@
         <file>atras.png</file>
         <file>minus.png</file>
         <file>icono.png</file>
+        <file>entradas-salidas.png</file>
+        <file>hitorial.png</file>
+        <file>usuarios.png</file>
     </qresource>
     <qresource prefix="/">
         <file>Terminos.txt</file>

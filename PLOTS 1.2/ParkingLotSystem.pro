@@ -27,6 +27,7 @@ SOURCES += \
     inicio_sesion.cpp \
     modificarinfo.cpp \
     registar_clienteb.cpp \
+    reser.cpp \
     tarjeta.cpp \
     usuario.cpp \
     ingresaconreserva.cpp \
@@ -43,6 +44,7 @@ HEADERS += \
     inicio_sesion.h \
     modificarinfo.h \
     registar_clienteb.h \
+    reser.h \
     tarjeta.h \
     usuario.h \
     ingresaconreserva.h \

@@ -88,10 +88,10 @@ background-color: rgba(0, 0, 0, 80);
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>240</x>
       <y>20</y>
-      <width>591</width>
-      <height>101</height>
+      <width>538</width>
+      <height>82</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">

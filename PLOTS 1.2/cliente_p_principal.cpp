@@ -89,7 +89,7 @@ void Cliente_P_Principal::CargarLugares(int id, QString calendario, QString relo
 
 void Cliente_P_Principal::VerReservaciones(int id){
     QSqlQuery *reservaciones = new QSqlQuery();
-    if(reservaciones->exec("Select id_reservacion, fecha, h_entrada, h_salida, id_cajon, id_piso, id_reservacion From reservacion WHERE id_cliente ="
+    if(reservaciones->exec("Select id_reservacion, fecha, h_entrada, h_salida, id_cajon, id_piso, id_reservacion,fecha_fin From reservacion WHERE id_cliente ="
         +QString::number(id)+";")){
 
         int fila;
@@ -103,6 +103,8 @@ void Cliente_P_Principal::VerReservaciones(int id){
             ui->Mis_rservas_tableWidget->setItem(fila,3,new QTableWidgetItem(reservaciones->value(3).toString()));
             ui->Mis_rservas_tableWidget->setItem(fila,4,new QTableWidgetItem(reservaciones->value(4).toString()));
             ui->Mis_rservas_tableWidget->setItem(fila,5,new QTableWidgetItem(reservaciones->value(5).toString()));
+            ui->Mis_rservas_tableWidget->setItem(fila,6,new QTableWidgetItem(reservaciones->value(7).toString()));
+
 
         }
     }
@@ -110,9 +112,42 @@ void Cliente_P_Principal::VerReservaciones(int id){
 
 
 
-    /*Relleno de terminos y condiciones */
+
 
 }
+
+void Cliente_P_Principal::Ver_HistorialReservaciones(int id)
+{
+    //DEFINO LA FUNCIÓN PARA VER EL HISTORIAL DE RESERVACIONES
+    qDebug()<<"Entro a la mera funcion";
+
+    QSqlQuery *Historial_resv = new QSqlQuery();
+    if (Historial_resv->exec("SELECT id_reservacion, fecha, h_entrada, h_salida, fecha_inicio, fecha_fin, id_cajon, id_piso FROM reservacion WHERE id_cliente = "+QString::number(id)+" and fecha < CURDATE();"))
+        qDebug()<<"hago el query";
+    {
+        qDebug()<<Historial_resv->lastError();
+
+        int indice = 0;
+        while(Historial_resv->next())
+        {
+            qDebug()<<"Empiezo a mostrar datos tabla";
+            ui->tabla_reservaciones_tableWidget->insertRow(ui->tabla_reservaciones_tableWidget->rowCount());
+            indice = ui->tabla_reservaciones_tableWidget->rowCount()-1;
+            ui->tabla_reservaciones_tableWidget->setItem(indice, 0, new QTableWidgetItem(Historial_resv->value(0).toString()));
+            ui->tabla_reservaciones_tableWidget->setItem(indice, 1, new QTableWidgetItem(Historial_resv->value(1).toString()));
+            ui->tabla_reservaciones_tableWidget->setItem(indice, 2, new QTableWidgetItem(Historial_resv->value(2).toString()));
+            ui->tabla_reservaciones_tableWidget->setItem(indice, 3, new QTableWidgetItem(Historial_resv->value(3).toString()));
+            ui->tabla_reservaciones_tableWidget->setItem(indice, 4, new QTableWidgetItem(Historial_resv->value(4).toString()));
+            ui->tabla_reservaciones_tableWidget->setItem(indice, 5, new QTableWidgetItem(Historial_resv->value(5).toString()));
+            ui->tabla_reservaciones_tableWidget->setItem(indice, 6, new QTableWidgetItem(Historial_resv->value(6).toString()));
+            ui->tabla_reservaciones_tableWidget->setItem(indice, 7, new QTableWidgetItem(Historial_resv->value(7).toString()));
+        }
+    }
+    delete Historial_resv;
+
+}
+
+
 
 Cliente_P_Principal::Cliente_P_Principal(int a)
 {
@@ -194,6 +229,20 @@ Cliente_P_Principal::Cliente_P_Principal(QSqlDatabase a, int b,QWidget *parent) 
 
     Principal_Actualizar = new ModificarInfo(cliente_principal,auto_principal,this);
     QObject::connect(Principal_Actualizar,SIGNAL(Mandar_Objeto()),this,SLOT(ObtenerObjeto()));
+
+
+
+
+    /*------------------------------------------------*/
+    ui->intervalos_tableWidget->setRowCount(0);
+    QStringList titulos;
+    titulos<<"Fecha Incial"<<"Fecha Final"<<"Hora Inicial" << " Hora final" << "Dias";
+    ui->intervalos_tableWidget->setColumnCount(5);
+    ui->intervalos_tableWidget->setHorizontalHeaderLabels(titulos);
+
+    ListaIntervalos = new QList<Reser>();
+
+    /*------------------------------------------------*/
 
 }
 
@@ -378,8 +427,8 @@ void Cliente_P_Principal::on_MisReservas_pushButton_clicked()
     ui->Mis_rservas_tableWidget->clear();
     ui->Mis_rservas_tableWidget->setRowCount(0);
     QStringList titulos;
-    titulos<<"ID Reservación"<<"Fecha"<<"Hora Entrada"<<"Hora Salida"<<"Num. Cajón"<<"Num. Piso";
-    ui->Mis_rservas_tableWidget->setColumnCount(6);
+    titulos<<"ID Reservación"<<"Fecha"<<"Hora Entrada"<<"Hora Salida"<<"Num. Cajón"<<"Num. Piso" <<" Fecha Fin";
+    ui->Mis_rservas_tableWidget->setColumnCount(7);
     ui->Mis_rservas_tableWidget->setHorizontalHeaderLabels(titulos);
     VerReservaciones(cliente_principal->GetId());
     ui->Ventanas->setCurrentIndex(3);
@@ -387,7 +436,7 @@ void Cliente_P_Principal::on_MisReservas_pushButton_clicked()
 
 void Cliente_P_Principal::on_Contrato_pushButton_clicked()
 {
-    ui->Ventanas->setCurrentIndex(5);
+    ui->Ventanas->setCurrentIndex(6);
 }
 
 
@@ -613,31 +662,182 @@ void Cliente_P_Principal::on_H_llegadatimeEdit_2_timeChanged(const QTime &time)
     vaciar();
     CargarLugares(2,f_entrada,h_entrada);
 }
+/*RSERVA POR INTERVALOS DE TIEMPO*/
 
 void Cliente_P_Principal::on_Confirma_Reserva_pushButton_clicked()
 {
-    QSqlQuery *insertar = new QSqlQuery();
 
+    int i;
+    qDebug() << "*****************";
+    for(i = 0; i < ListaIntervalos->size(); ++i){
+       Reser aux2 = ListaIntervalos->at(i);
+       qDebug() << "Fecha Inici : "<< aux2.GetFecha_Inicio();
+       qDebug() << "Fecha Fin : "<< aux2.GetFecha_Fin();
+    }
+    qDebug() << "*****************";
+
+
+    QMessageBox ask;
+     ask.setWindowTitle("\t\tReservacion por intervalos");
+     ask.setText("¿Desea agregar mas intervalos de reservacion?");
+     ask.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+     ask.setDefaultButton(QMessageBox::Yes);
+     ask.setButtonText(QMessageBox::Yes,"Agregar Reservaciones");
+     ask.setButtonText(QMessageBox::No,"Cancelar");
+
+      if(ask.exec()==QMessageBox::Yes){ // Agregar mas intervalos al objeto
+        int inte;
+        QSqlQuery *insertar = new QSqlQuery();
+        Reser aux3;
+          for(inte = 0; inte < ListaIntervalos->size(); ++inte){
+               aux3 = ListaIntervalos->at(inte);
+
+
+             if(insertar->exec("Insert into reservacion(fecha, h_entrada, h_salida, num_cajones, num_dias, fecha_inicio, fecha_fin, id_cliente, id_cajon, id_piso) VALUES('"+aux3.GetFecha_Inicio()+"','"+aux3.GetHora_Entrada()+"','"+aux3.GetHora_Salida()+"','1','"+QString::number(aux3.GetDias()) +"','"+ aux3.GetFecha_Inicio()+"','"+ aux3.GetFecha_Fin()+"','"+QString::number(cliente_principal->GetId())+"','"+QString::number(idCajon)+"','"+QString::number(idPiso)+"')")){
+                 qDebug() << "** Correcto ** ";
+             }else{
+                 qDebug() << "xx Incorrecto xx " << insertar->lastError();
+             }
+
+          }
+
+          delete insertar;
+          QMessageBox info;
+          info.setWindowTitle("Datos de Reservación");
+          info.setText("Su reservación ha sido agendada.");
+          info.setStandardButtons(QMessageBox::Ok);
+          info.setButtonText(QMessageBox::Ok,"Aceptar");
+          info.exec();
+          ui->intervalos_tableWidget->clear();
+          ui->intervalos_tableWidget->setRowCount(0);
+
+      }
+}
+
+
+
+void Cliente_P_Principal::on_Aceptar_pushButton_clicked()
+{
+
+    QSqlQuery *a = new QSqlQuery();
+    QSqlQuery *b = new QSqlQuery();           /*Aqui van los QUERYS para insertar la suscripcion y actualizar el usuario*/
+    QMessageBox ask;
+     ask.setWindowTitle("\t\tAviso Importante");
+     ask.setText("¿Esta seguro de cambiar el modo de perfil?.\n"
+                  "Pasara de cliente premium a clente basico\n"
+                  "Perdera muchisimos beneficios");
+     ask.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+     ask.setDefaultButton(QMessageBox::Yes);
+     ask.setButtonText(QMessageBox::Yes,"Aceptar");
+     ask.setButtonText(QMessageBox::No,"Cancelar");
+
+      if(ask.exec()==QMessageBox::Yes){
+
+
+       if(a->exec("DELETE FROM suscripción where id_cliente ="+ QString::number(cliente_principal->GetId()) +";")){
+
+                        if(b->exec("UPDATE usuario SET tipo_usuario='clientebasico' where id_usuario="+QString::number(cliente_principal->GetIdUsuario()) +";")){
+                            QMessageBox info;
+                            info.setWindowTitle("Suscripcion Premium Cancelada");
+                            info.setText("Su SUSCRIPCION PREMIUM a sido cancelada exitosamente, vuelva a INICIAR SESION");
+                            info.setStandardButtons(QMessageBox::Ok);
+                            info.setButtonText(QMessageBox::Ok,"Aceptar");
+                            info.exec();
+                            close();
+
+
+                        }
+                        else{
+                            qDebug()<<"Fallo Actualizacion de usuario " << b->lastError();
+                        }
+
+                }
+                else{
+                    qDebug()<<"Fallo inssercion de suscripcion " << a->lastError();
+                }
+            }
+
+
+
+
+}
+
+void Cliente_P_Principal::on_Historial_reserv_pushButton_clicked()
+{
+    ui->Ventanas->setCurrentIndex(4);
+    ui->Mis_rservas_tableWidget->clear();
+    //Datos para la tabla "Historial de reservaciones"
+    QStringList titles_tabla_Historial;
+    titles_tabla_Historial<<"ID Reservación"<<"Fecha"<<"Hora Entrada"<<"Hora Salida"<<"Fecha inicial" <<"Fecha final" <<"Num. Cajón"<<"Num. Piso";
+    ui->tabla_reservaciones_tableWidget ->setColumnCount(8);
+    ui->tabla_reservaciones_tableWidget->setHorizontalHeaderLabels(titles_tabla_Historial);
+    //Mando a llamar a la funcion
+    Ver_HistorialReservaciones(cliente_principal->GetId());
+}
+/*El siguiente metodo pertenece a la historia de reservacion
+premium agrega elementos para reservaciones por intervalos*/
+void Cliente_P_Principal::on_agregar_pushButton_clicked()
+{
     QDate fecha = ui->calendarWidget->selectedDate();
     QString f_entrada = fecha.toString("yyyyMMdd");
+
+    QDate fecha_fin = ui->fincalendarWidget_3->selectedDate();
+    QString f_fin = fecha_fin.toString("yyyyMMdd");
+
     QTime hora = ui->H_llegadatimeEdit->time();
     QString h_entrada = hora.toString();
     QTime salida = ui->H_salidatimeEdit->time();
     QString h_salida = salida.toString();
+    Reser aux;
+    int d = 0;
 
-    if(insertar->exec("Insert into reservacion(fecha, h_entrada, h_salida, num_cajones, id_cliente, id_cajon, id_piso) VALUES('"+f_entrada+"','"+h_entrada+"','"+h_salida+"','1','"+QString::number(cliente_principal->GetId())+"','"+QString::number(idCajon)+"','"+QString::number(idPiso)+"')")){
-        QMessageBox info;
-        info.setWindowTitle("Datos de Reservación");
-        info.setText("Su reservación ha sido agendada.");
-        info.setStandardButtons(QMessageBox::Ok);
-        info.setButtonText(QMessageBox::Ok,"Aceptar");
-        info.exec();
-        vaciar();
-        CargarLugares(idPiso,f_entrada,h_entrada);
+    int diferencia =fecha_fin.month() - fecha.month();
+
+    if(diferencia == 0){
+        d = fecha_fin.day() - fecha.day();
     }
     else{
-        qDebug()<<"no inserto";
-        qDebug()<<insertar->lastError();
+        d = (diferencia * 30) + (fecha_fin.day() - fecha.day());
     }
-    delete insertar;
+
+    aux.Set_FechaInicio(f_entrada);
+    aux.Set_FechaFin(f_fin);
+    aux.Set_HoraEntrada(h_entrada);
+    aux.Set_HoraSalida(h_salida);
+
+    aux.Set_Dias(d);
+    int fila;
+
+           ui->intervalos_tableWidget->insertRow(ui->intervalos_tableWidget->rowCount());
+           fila = ui->intervalos_tableWidget->rowCount() - 1;
+           // ui->Mis_rservas_tableWidget->insertRow(ui->Mis_rservas_tableWidget->rowCount());
+           // fila = ui->Mis_rservas_tableWidget->rowCount()-1;
+           ui->intervalos_tableWidget->setItem(fila,0,new QTableWidgetItem(aux.GetFecha_Inicio()));
+           ui->intervalos_tableWidget->setItem(fila,1,new QTableWidgetItem(aux.GetFecha_Fin()));
+           ui->intervalos_tableWidget->setItem(fila,2,new QTableWidgetItem(aux.GetHora_Entrada()));
+           ui->intervalos_tableWidget->setItem(fila,3,new QTableWidgetItem(aux.GetHora_Salida()));
+           ui->intervalos_tableWidget->setItem(fila,4,new QTableWidgetItem(QString::number(aux.GetDias())));
+
+     // Igualar calentarios
+    ui->calendarWidget->showToday();
+    ui->fincalendarWidget_3->showToday();
+    ListaIntervalos->append(aux);
+    qDebug() << " Se agrego sin pedos ";
+
+}
+
+/*Cancelar la reservacion.*/
+void Cliente_P_Principal::on_cancelar_reser_pushButton_clicked()
+{
+
+    ui->intervalos_tableWidget->clear();
+    ui->intervalos_tableWidget->setRowCount(0);
+
+    ui->Ventanas->setCurrentIndex(0);
+    ui->calendarWidget->showToday();
+    ui->fincalendarWidget_3->showToday();
+    delete ListaIntervalos;
+    ListaIntervalos = new QList<Reser>();
+    qDebug() << " Todo correcot ";
+
 }

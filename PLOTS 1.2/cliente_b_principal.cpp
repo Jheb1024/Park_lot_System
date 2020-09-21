@@ -111,6 +111,7 @@ void Cliente_B_Principal::VerReservaciones(int id){
 
 }
 
+
 Cliente_B_Principal::Cliente_B_Principal(int a)
 {
     Id_Usuario = a;
@@ -678,10 +679,15 @@ void Cliente_B_Principal::on_Aceptar_pushButton_clicked()
     QString f_inicio = FechaInicioContrato.toString("yyyyMMdd");
     QDate FechaFinContrato = QDate::currentDate();
     QString f_fin = FechaFinContrato.toString("yyyyMMdd");
+
+    if(ui->AgregarFecha_radioButton->isChecked())
+       f_fin = aux_final;
+
+
     QSqlQuery *a = new QSqlQuery();
     QSqlQuery *b = new QSqlQuery();
     if(ui->Terminos_checkBox->isChecked()){
-        if(ui->Automatica_radioButton->isChecked()){
+
             /*Aqui van los QUERYS para insertar la suscripcion y actualizar el usuario*/
             QMessageBox ask;
             ask.setWindowTitle("\t\tAviso Importante");
@@ -708,8 +714,6 @@ void Cliente_B_Principal::on_Aceptar_pushButton_clicked()
                             info.setButtonText(QMessageBox::Ok,"Aceptar");
                             info.exec();
                             close();
-
-
                         }
                         else{
                             qDebug()<<"Fallo Actualizacion de usuario " << b->lastError();
@@ -720,18 +724,8 @@ void Cliente_B_Principal::on_Aceptar_pushButton_clicked()
                     qDebug()<<"Fallo inssercion de suscripcion " << a->lastError();
                 }
             }
-
-
-        }else{
-         if(ui->AgregarFecha_radioButton->isChecked()){
-             /*Agregar suscripcion con fecha y agregar suscripcion y actualizar usuario*/
-             /*qDebug()<<"evento calendario";
-             QDate fecha = ui->calendarWidget_2->selectedDate();
-             QString f_entrada = fecha.toString("yyyyMMdd");*/
-
-         }
         }
-    }else{
+    else{
         QMessageBox::information(this,"Terminos y Condiciones","Aun no a aceptado los terminos y condiciones para poder continuar");
     }
 }
@@ -739,4 +733,10 @@ void Cliente_B_Principal::on_Aceptar_pushButton_clicked()
 void Cliente_B_Principal::on_Regresar_pushButton_clicked()
 {
     ui->Ventanas->setCurrentIndex(5);
+}
+
+void Cliente_B_Principal::on_FechacalendarWidget_selectionChanged()
+{
+    QDate fecha = ui->FechacalendarWidget->selectedDate();
+    aux_final = fecha.toString("yyyyMMdd");
 }
